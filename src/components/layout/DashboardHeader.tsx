@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Bell, ChevronDown, LogOut, FileText, CheckCircle, AlertTriangle, Info } from "lucide-react";
+import { Bell, ChevronDown, LogOut, FileText, CheckCircle, AlertTriangle, Info, Menu } from "lucide-react";
+import { useSidebar } from "@/components/ui/sidebar-context";
 
 const notifications = [
   {
@@ -57,6 +58,7 @@ const notifications = [
 
 export function DashboardHeader() {
   const navigate = useNavigate();
+  const { toggleSidebar } = useSidebar();
   const [profileOpen, setProfileOpen] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
   const profileRef = useRef<HTMLDivElement>(null);
@@ -76,7 +78,17 @@ export function DashboardHeader() {
   }, []);
 
   return (
-    <header className="flex items-center justify-end gap-2 border-b bg-white px-3 py-3 sm:gap-4 sm:px-6">
+    <header className="flex items-center justify-between gap-2 border-b bg-white px-3 py-3 sm:gap-4 sm:px-6">
+      {/* Mobile Sidebar Toggle */}
+      <button
+        onClick={toggleSidebar}
+        className="rounded-md p-2 text-gray-500 hover:bg-gray-100 md:hidden"
+      >
+        <Menu className="size-5" />
+      </button>
+      <div className="hidden md:block" />
+
+      <div className="flex items-center gap-2 sm:gap-4">
       {/* Notification Bell */}
       <div ref={notifRef} className="relative">
         <button
@@ -180,6 +192,7 @@ export function DashboardHeader() {
             </button>
           </div>
         )}
+      </div>
       </div>
     </header>
   );
