@@ -19,13 +19,7 @@ export default function TambahInovasiPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     toast.success("Add data berhasil");
-    setTimeout(
-      () =>
-        navigate("/inovasi/detail", {
-          state: { issue, kementrian, entitas },
-        }),
-      1000
-    );
+    setTimeout(() => navigate("/inovasi"), 1000);
   };
 
   return (

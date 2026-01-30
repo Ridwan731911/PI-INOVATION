@@ -13,10 +13,6 @@ export default function DaftarInovasiPage() {
   const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  // Edit modal state
-  const [editItem, setEditItem] = useState<InovasiItem | null>(null);
-  const [editName, setEditName] = useState("");
-
   // Delete modal state
   const [deleteItem, setDeleteItem] = useState<InovasiItem | null>(null);
 
@@ -41,16 +37,6 @@ export default function DaftarInovasiPage() {
 
   const handlePageChange = (p: number) => {
     if (p >= 1 && p <= totalPages) setPage(p);
-  };
-
-  const openEdit = (item: InovasiItem) => {
-    setEditName(item.projectName);
-    setEditItem(item);
-  };
-
-  const handleEdit = () => {
-    setEditItem(null);
-    toast.success("Edit data berhasil");
   };
 
   const handleDelete = () => {
@@ -131,7 +117,17 @@ export default function DaftarInovasiPage() {
                   <td className="px-4 py-3">
                     <div className="flex items-center justify-center gap-2">
                       <button
-                        onClick={() => openEdit(item)}
+                        onClick={() =>
+                          navigate("/inovasi/detail", {
+                            state: {
+                              id: item.id,
+                              projectName: item.projectName,
+                              kategori: item.kategori,
+                              entitas: item.entitas,
+                              status: item.status,
+                            },
+                          })
+                        }
                         className="rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-blue-600"
                       >
                         <Pencil className="size-4" />
@@ -179,55 +175,6 @@ export default function DaftarInovasiPage() {
           </button>
         </div>
       </div>
-
-      {/* Edit Modal */}
-      {editItem && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="w-full max-w-md rounded-xl bg-white p-4 shadow-lg sm:p-6">
-            <h2 className="mb-4 text-lg font-bold text-gray-800">
-              Edit Inovasi
-            </h2>
-            <div className="space-y-4">
-              <div>
-                <label className="mb-1 block text-sm font-semibold text-gray-700">
-                  ID Inovasi
-                </label>
-                <input
-                  type="text"
-                  value={editItem.id}
-                  disabled
-                  className="w-full rounded-lg border-2 border-gray-200 bg-gray-100 px-4 py-2.5 text-sm text-gray-500"
-                />
-              </div>
-              <div>
-                <label className="mb-1 block text-sm font-semibold text-gray-700">
-                  Project Name
-                </label>
-                <input
-                  type="text"
-                  value={editName}
-                  onChange={(e) => setEditName(e.target.value)}
-                  className="w-full rounded-lg border-2 border-gray-200 px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none"
-                />
-              </div>
-            </div>
-            <div className="mt-6 flex justify-end gap-3">
-              <button
-                onClick={() => setEditItem(null)}
-                className="rounded-lg border px-6 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50"
-              >
-                Batal
-              </button>
-              <button
-                onClick={handleEdit}
-                className="rounded-lg bg-blue-700 px-6 py-2 text-sm font-medium text-white hover:bg-blue-800"
-              >
-                Simpan
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Delete Modal */}
       {deleteItem && (

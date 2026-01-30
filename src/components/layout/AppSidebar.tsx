@@ -24,7 +24,7 @@ export function AppSidebar() {
 
   return (
     <Sidebar collapsible="icon" className="rounded-r-2xl border-none">
-      <SidebarHeader className="p-4">
+      <SidebarHeader className="p-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3 group-data-[collapsible=icon]:hidden">
             <img src="/logo2.png" alt="Logo" className="h-10" />

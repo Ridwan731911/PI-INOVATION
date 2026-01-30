@@ -7,12 +7,16 @@ export default function DetailInovasiPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const state = location.state as {
-    issue: string;
-    kementrian: string;
-    entitas: string;
+    id?: string;
+    projectName?: string;
+    kategori?: string;
+    entitas?: string;
+    status?: string;
+    issue?: string;
+    kementrian?: string;
   } | null;
 
-  const [projectName, setProjectName] = useState("");
+  const [projectName, setProjectName] = useState(state?.projectName ?? "");
   const [projectInitiator, setProjectInitiator] = useState("");
   const [portfolio, setPortfolio] = useState("");
   const [timeline, setTimeline] = useState("");
@@ -33,6 +37,51 @@ export default function DetailInovasiPage() {
 
       <div className="rounded-xl border-2 border-gray-200 bg-white p-4 shadow-md sm:p-6">
         <div className="space-y-6">
+          {/* ID Inovasi */}
+          {state?.id && (
+            <div>
+              <label className="mb-2 block text-sm font-semibold text-gray-700">
+                ID Inovasi
+              </label>
+              <input
+                type="text"
+                value={state.id}
+                disabled
+                className="w-full rounded-lg border-2 border-gray-200 bg-gray-100 px-4 py-3 text-sm text-gray-500"
+              />
+            </div>
+          )}
+
+          {/* Kategori Inovasi */}
+          {state?.kategori && (
+            <div>
+              <label className="mb-2 block text-sm font-semibold text-gray-700">
+                Kategori Inovasi
+              </label>
+              <input
+                type="text"
+                value={state.kategori}
+                disabled
+                className="w-full rounded-lg border-2 border-gray-200 bg-gray-100 px-4 py-3 text-sm text-gray-500"
+              />
+            </div>
+          )}
+
+          {/* Status */}
+          {state?.status && (
+            <div>
+              <label className="mb-2 block text-sm font-semibold text-gray-700">
+                Status
+              </label>
+              <input
+                type="text"
+                value={state.status}
+                disabled
+                className="w-full rounded-lg border-2 border-gray-200 bg-gray-100 px-4 py-3 text-sm text-gray-500"
+              />
+            </div>
+          )}
+
           {/* Disabled fields from Tambah */}
           <div>
             <label className="mb-2 block text-sm font-semibold text-gray-700">
