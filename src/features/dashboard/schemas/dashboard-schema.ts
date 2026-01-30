@@ -22,6 +22,9 @@ export const inovasiSchema = z.object({
   kategori: kategoriInovasiEnum,
   entitas: z.string(),
   status: inovasiStatusEnum,
+  pengusulIde: z.string(),
+  informasiAwal: z.string(),
+  kementrian: z.string(),
 });
 
 export const inovasiPerBulanSchema = z.object({

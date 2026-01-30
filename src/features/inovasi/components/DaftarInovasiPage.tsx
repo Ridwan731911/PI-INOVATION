@@ -25,6 +25,9 @@ export default function DaftarInovasiPage() {
         item.projectName.toLowerCase().includes(q) ||
         item.kategori.toLowerCase().includes(q) ||
         item.entitas.toLowerCase().includes(q) ||
+        item.pengusulIde.toLowerCase().includes(q) ||
+        item.informasiAwal.toLowerCase().includes(q) ||
+        item.kementrian.toLowerCase().includes(q) ||
         item.status.toLowerCase().includes(q)
     );
   }, [search]);
@@ -99,6 +102,9 @@ export default function DaftarInovasiPage() {
                 <th className="px-4 py-3">Project Name</th>
                 <th className="px-4 py-3">Kategori Inovasi</th>
                 <th className="px-4 py-3">Entitas Penanggung Jawab</th>
+                <th className="px-4 py-3">Pengusul Ide</th>
+                <th className="px-4 py-3">Informasi Awal</th>
+                <th className="px-4 py-3">Kementrian / Lembaga</th>
                 <th className="px-4 py-3">Status</th>
                 <th className="px-4 py-3 text-center">Action</th>
               </tr>
@@ -113,6 +119,9 @@ export default function DaftarInovasiPage() {
                   <td className="px-4 py-3">{item.projectName}</td>
                   <td className="px-4 py-3">{item.kategori}</td>
                   <td className="px-4 py-3">{item.entitas}</td>
+                  <td className="px-4 py-3">{item.pengusulIde}</td>
+                  <td className="px-4 py-3">{item.informasiAwal}</td>
+                  <td className="px-4 py-3">{item.kementrian}</td>
                   <td className="px-4 py-3">{item.status}</td>
                   <td className="px-4 py-3">
                     <div className="flex items-center justify-center gap-2">
@@ -125,6 +134,9 @@ export default function DaftarInovasiPage() {
                               kategori: item.kategori,
                               entitas: item.entitas,
                               status: item.status,
+                              pengusulIde: item.pengusulIde,
+                              informasiAwal: item.informasiAwal,
+                              kementrian: item.kementrian,
                             },
                           })
                         }

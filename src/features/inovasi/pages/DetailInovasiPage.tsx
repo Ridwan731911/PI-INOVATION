@@ -12,8 +12,10 @@ export default function DetailInovasiPage() {
     kategori?: string;
     entitas?: string;
     status?: string;
-    issue?: string;
+    pengusulIde?: string;
+    informasiAwal?: string;
     kementrian?: string;
+    issue?: string;
   } | null;
 
   const [projectName, setProjectName] = useState(state?.projectName ?? "");
@@ -22,6 +24,7 @@ export default function DetailInovasiPage() {
   const [timeline, setTimeline] = useState("");
   const [objective, setObjective] = useState("");
   const [nextStep, setNextStep] = useState("");
+  const [status, setStatus] = useState(state?.status ?? "");
   const [showModal, setShowModal] = useState(false);
 
   const [showRejectModal, setShowRejectModal] = useState(false);
@@ -45,67 +48,51 @@ export default function DetailInovasiPage() {
 
       <div className="rounded-xl border-2 border-gray-200 bg-white p-4 shadow-md sm:p-6">
         <div className="space-y-6">
+          {/* === Disabled fields (atas) === */}
+
           {/* ID Inovasi */}
-          {state?.id && (
-            <div>
-              <label className="mb-2 block text-sm font-semibold text-gray-700">
-                ID Inovasi
-              </label>
-              <input
-                type="text"
-                value={state.id}
-                disabled
-                className="w-full rounded-lg border-2 border-gray-200 bg-gray-100 px-4 py-3 text-sm text-gray-500"
-              />
-            </div>
-          )}
-
-          {/* Kategori Inovasi */}
-          {state?.kategori && (
-            <div>
-              <label className="mb-2 block text-sm font-semibold text-gray-700">
-                Kategori Inovasi
-              </label>
-              <input
-                type="text"
-                value={state.kategori}
-                disabled
-                className="w-full rounded-lg border-2 border-gray-200 bg-gray-100 px-4 py-3 text-sm text-gray-500"
-              />
-            </div>
-          )}
-
-          {/* Status */}
-          {state?.status && (
-            <div>
-              <label className="mb-2 block text-sm font-semibold text-gray-700">
-                Status
-              </label>
-              <input
-                type="text"
-                value={state.status}
-                disabled
-                className="w-full rounded-lg border-2 border-gray-200 bg-gray-100 px-4 py-3 text-sm text-gray-500"
-              />
-            </div>
-          )}
-
-          {/* Disabled fields from Tambah */}
           <div>
             <label className="mb-2 block text-sm font-semibold text-gray-700">
-              Issue / Informasi Awal
+              ID Inovasi
+            </label>
+            <input
+              type="text"
+              value={state?.id ?? ""}
+              disabled
+              className="w-full rounded-lg border-2 border-gray-200 bg-gray-100 px-4 py-3 text-sm text-gray-500"
+            />
+          </div>
+
+          {/* Pengusul Ide */}
+          <div>
+            <label className="mb-2 block text-sm font-semibold text-gray-700">
+              Pengusul Ide
+            </label>
+            <input
+              type="text"
+              value={state?.pengusulIde ?? ""}
+              disabled
+              className="w-full rounded-lg border-2 border-gray-200 bg-gray-100 px-4 py-3 text-sm text-gray-500"
+            />
+          </div>
+
+          {/* Ide Awal / Issue */}
+          <div>
+            <label className="mb-2 block text-sm font-semibold text-gray-700">
+              Ide Awal / Issue
             </label>
             <textarea
-              value={state?.issue ?? ""}
+              value={state?.informasiAwal ?? state?.issue ?? ""}
               disabled
               rows={5}
               className="w-full rounded-lg border-2 border-gray-200 bg-gray-100 px-4 py-3 text-sm text-gray-500"
             />
           </div>
 
+          {/* Kementrian / Lembaga */}
           <div>
             <label className="mb-2 block text-sm font-semibold text-gray-700">
-              Kementrian / Lembaga
+              Kementerian / Lembaga Terkait
             </label>
             <input
               type="text"
@@ -115,6 +102,7 @@ export default function DetailInovasiPage() {
             />
           </div>
 
+          {/* Rekomendasi Entitas */}
           <div>
             <label className="mb-2 block text-sm font-semibold text-gray-700">
               Rekomendasi Entitas
@@ -127,7 +115,9 @@ export default function DetailInovasiPage() {
             />
           </div>
 
-          {/* Editable detail fields */}
+          {/* === Editable fields (bawah) === */}
+
+          {/* Project Name */}
           <div>
             <label className="mb-2 block text-sm font-semibold text-gray-700">
               Project Name
@@ -140,6 +130,7 @@ export default function DetailInovasiPage() {
             />
           </div>
 
+          {/* Project Initiator */}
           <div>
             <label className="mb-2 block text-sm font-semibold text-gray-700">
               Project Initiator
@@ -152,6 +143,7 @@ export default function DetailInovasiPage() {
             />
           </div>
 
+          {/* Portfolio */}
           <div>
             <label className="mb-2 block text-sm font-semibold text-gray-700">
               Portfolio
@@ -164,6 +156,7 @@ export default function DetailInovasiPage() {
             />
           </div>
 
+          {/* Timeline */}
           <div>
             <label className="mb-2 block text-sm font-semibold text-gray-700">
               Timeline
@@ -176,6 +169,7 @@ export default function DetailInovasiPage() {
             />
           </div>
 
+          {/* Objective & Description */}
           <div>
             <label className="mb-2 block text-sm font-semibold text-gray-700">
               Objective & Description
@@ -188,6 +182,7 @@ export default function DetailInovasiPage() {
             />
           </div>
 
+          {/* Next Step */}
           <div>
             <label className="mb-2 block text-sm font-semibold text-gray-700">
               Next Step
@@ -198,6 +193,25 @@ export default function DetailInovasiPage() {
               rows={4}
               className="w-full rounded-lg border-2 border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:outline-none"
             />
+          </div>
+
+          {/* Status */}
+          <div>
+            <label className="mb-2 block text-sm font-semibold text-gray-700">
+              Status
+            </label>
+            <select
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+              className="w-full rounded-lg border-2 border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:outline-none"
+            >
+              <option value="">Pilih Status</option>
+              <option value="Konsep">Konsep</option>
+              <option value="Perancangan">Perancangan</option>
+              <option value="Pengembangan">Pengembangan</option>
+              <option value="Implementasi">Implementasi</option>
+              <option value="Dihentikan">Dihentikan</option>
+            </select>
           </div>
         </div>
 
