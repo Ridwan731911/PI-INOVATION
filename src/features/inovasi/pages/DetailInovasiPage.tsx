@@ -24,9 +24,17 @@ export default function DetailInovasiPage() {
   const [nextStep, setNextStep] = useState("");
   const [showModal, setShowModal] = useState(false);
 
+  const [showRejectModal, setShowRejectModal] = useState(false);
+
   const handleApproval = () => {
     setShowModal(false);
     toast.success("Approval berhasil");
+    setTimeout(() => navigate("/inovasi"), 1000);
+  };
+
+  const handleReject = () => {
+    setShowRejectModal(false);
+    toast.success("Inovasi Berhasil Ditolak");
     setTimeout(() => navigate("/inovasi"), 1000);
   };
 
@@ -195,7 +203,14 @@ export default function DetailInovasiPage() {
 
         <hr className="my-6" />
 
-        <div className="flex justify-end">
+        <div className="flex justify-end gap-3">
+          <button
+            type="button"
+            onClick={() => setShowRejectModal(true)}
+            className="rounded-lg bg-red-600 px-8 py-2.5 text-sm font-medium text-white hover:bg-red-700"
+          >
+            Reject
+          </button>
           <button
             type="button"
             onClick={() => setShowModal(true)}
@@ -228,6 +243,33 @@ export default function DetailInovasiPage() {
                 className="rounded-lg bg-blue-700 px-6 py-2 text-sm font-medium text-white hover:bg-blue-800"
               >
                 Approve
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* Reject Modal */}
+      {showRejectModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="w-full max-w-md rounded-xl bg-white p-4 shadow-lg sm:p-6">
+            <h2 className="mb-4 text-lg font-bold text-gray-800">
+              Konfirmasi Reject
+            </h2>
+            <p className="mb-6 text-sm text-gray-600">
+              Apakah Anda yakin ingin menolak inovasi ini?
+            </p>
+            <div className="flex justify-end gap-3">
+              <button
+                onClick={() => setShowRejectModal(false)}
+                className="rounded-lg border px-6 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50"
+              >
+                Batal
+              </button>
+              <button
+                onClick={handleReject}
+                className="rounded-lg bg-red-600 px-6 py-2 text-sm font-medium text-white hover:bg-red-700"
+              >
+                Reject
               </button>
             </div>
           </div>
